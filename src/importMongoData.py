@@ -1,8 +1,6 @@
 """Seperate program. Imports champion & move database into Mongo."""
 
 import sys
-import json
-import pandas as pd
 from pymongo import MongoClient
 
 
