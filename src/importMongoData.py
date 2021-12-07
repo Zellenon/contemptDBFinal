@@ -26,6 +26,7 @@ def getData(fpath):
     data = [w.replace("\n", "") for w in data]
     data = [w.split(',\t') for w in data]
     headers = data[0]
+    print(headers)
     headers[0] = "index"
     entries = [{headers[c]: w[c] for c in range(0, len(headers))}
                for w in data[1:]]
@@ -37,3 +38,10 @@ db.abilities.drop()
 db.create_collection("abilities")
 entries = getData("../res/abilities.tsv")
 db.abilities.insert_many(entries)
+db.abilities.create_index([("name", "text"), ("description", "text")])
+
+db.champs.drop()
+db.create_collection("champs")
+entries = getData("../res/champs.tsv")
+db.champs.insert_many(entries)
+db.champs.create_index([("name", "text"), ("title", "text"), ("lore", "text")])
