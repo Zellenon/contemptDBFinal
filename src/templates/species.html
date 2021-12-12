@@ -1,0 +1,42 @@
+
+<html>
+  <head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css">
+  <script>
+      
+  $(function() {
+    $("#species").autocomplete({ source: "/search" });
+  });
+  </script>
+  </head>
+  <body>
+    <form action="/species">
+      <h3>{{message}}</h3>
+      <label for="species">Pokemon species name:</label>
+      <input id="species" name="name" value="{{species}}">
+      <input type="submit">
+    </form>
+    <div id="main">
+        <h2>{{speciesName}}s</h2>
+        {% for poke in pokemons %}
+            <tr>
+                <h3>
+                    <li><a href="/pokemon?name={{ poke['name'] }}">{{ poke['name'] }}</a> {{ poke['type'] }}</li>
+               </h3>
+            </tr>
+        {% endfor %}
+
+
+        <h2>You may also like these species:</h2>
+
+        {% for sp in speciessug %}
+            <h4>
+                {{speciessug["name"]}} <a href="/species?name={{ sp }}">{{ sp }}
+            </h4>
+        {% endfor %}
+
+    </div>
+  </body>
+</html>
