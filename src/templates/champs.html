@@ -9,7 +9,11 @@
     </script>
     </head>
     <body>
-        <h1>{{champName}} {{champTitle}}</h1>
-        <p>{{champLore}}</p>
+        <div id="champsDisplay">
+            {% for c in champions %}
+                <h1>{{c["name"]}} {{c["title"]}}</h1>
+                <p>{{c["lore"]}}</p>
+            {% endfor %}
+        </div>
     </body>
   </html>

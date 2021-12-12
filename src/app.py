@@ -38,14 +38,18 @@ def listSpecies(speciesName=None):
         speciesName = request.args.get("name")
 
     mongoDoc = Mongo_Model().getChamps(speciesName)
-    neoResults = Neo4jModel().getSpeciesSuggestions(speciesName)
+    # neoResults = Neo4jModel().getSpeciesSuggestions(speciesName)
+
+    champs = []
+    for champ in mongoDoc:
+        champs.append({"name": champ['name'], "title": champ['title'], "lore": champ['lore']})
 
     print(mongoDoc)
-    name = mongoDoc[0]['name']
-    title = mongoDoc[0]['title']
-    lore = mongoDoc[0]['lore']
+    # name = mongoDoc[0]['name']
+    # title = mongoDoc[0]['title']
+    # lore = mongoDoc[0]['lore']
 
-    template = render_template("champs.html", champName=name, champTitle=title, champLore=lore)
+    template = render_template("champs.html", champions=champs)
     return template
 
 @app.route("/pokemon", methods=["GET"])
