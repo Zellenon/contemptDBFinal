@@ -42,7 +42,7 @@ def listSpecies(speciesName=None):
 
     champs = []
     for champ in mongoDoc:
-        champs.append({"name": champ['name'], "title": champ['title'], "lore": champ['lore']})
+        champs.append({"name": champ['name'], "title": champ['title'], "lore": champ['lore'], "tags": champ['tags'], "image": "/static/portraits/" + champ["index"] + ".jpg"})
 
     print(mongoDoc)
     # name = mongoDoc[0]['name']
