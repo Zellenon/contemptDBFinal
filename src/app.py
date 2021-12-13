@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, render_template
-from models import MongoModel, RedisModel, Neo4jModel
 from mongoModel import Mongo_Model
 from neoModel import Neo4j_Model
 
@@ -11,11 +10,11 @@ def hello():
     return render_template("template.html")
 
 
-@app.route("/search", methods=["GET"])
-def autocompleteSpecies():
-    term = request.args.get("term")
-    result = RedisModel().searchSpecies(term)
-    return jsonify(result)
+# @app.route("/search", methods=["GET"])
+# def autocompleteSpecies():
+#     term = request.args.get("term")
+#     result = RedisModel().searchSpecies(term)
+#     return jsonify(result)
 
 @app.route("/champs", methods=["GET"])
 def listSpecies(speciesName=None):
@@ -58,11 +57,6 @@ def listRecs(champ1=None, champ2=None, champ3=None):
 
     template = render_template("recs.html", rec1=championOne, rec2=championTwo)
     return template
-
-# @app.route("/champs")
-# def champs():
-
-#     return render_template("champs.html", champName="Olaf")
 
 if __name__ == "__main__":
     app.run( host='127.0.0.1', port=8000)                    # run the flask app
