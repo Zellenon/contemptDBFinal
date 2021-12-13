@@ -1,7 +1,7 @@
 from neo4j import GraphDatabase
 
-class Neo4jModel:
-    def __init__(self, url='bolt://localhost:7687', user='neo4j', password='a'):
+class Neo4j_Model:
+    def __init__(self, url='bolt://localhost:7687', user='neo4j', password='moderndb'):
         self.neo4jUrl = url
         self.neo4jDriver = GraphDatabase.driver(url, auth=(user, password))
 
@@ -32,9 +32,10 @@ class Neo4jModel:
             query = "MATCH (n:Champ) WHERE n.Name <> $champ1 AND n.Name <> $champ2 AND n.Name <> $champ3 RETURN DISTINCT n.Name as Name LIMIT 2"
         result = session.run(query, champ1 = champ1, champ2 = champ2, champ3 = champ3)
         response = self.makeList(result, "Name")
+        print("Response: " + str(response))
         session.close()
         return response
 
 # END CLASS
 
-print(Neo4jModel().getChampRandFiltered("Caitlyn", "Swain", "Bard"))
+print(Neo4j_Model().getChampRandFiltered("Caitlyn", "Swain", "Bard"))

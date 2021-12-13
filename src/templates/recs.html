@@ -13,28 +13,21 @@
   <p>Find champion by keyword, or build the rest of your team!</p>
 </div>
 
+<!-- render template gives this file access to rec1 and rec2 -->
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <form action="/champs">
-        <label for="species">Champion Search:</label>
-        <input id="species" name="name" value="{{species}}">
-        <input type="submit">
-      </form>
+        <h2>Champion Recommendation 1:</h2>
+        <h3>{{rec1["name"]}} {{rec1["title"]}}</h3>
+        <!-- image -->
+        <p>{{rec1["lore"]}}</p>
+    </div>
+    <div class="card">
+        <h2>Champion Recommendation 2:</h2>
+        <h3>{{rec2["name"]}} {{rec2["title"]}}</h3>
+        <!-- image -->
+        <p>{{rec2["lore"]}}</p>
 
-      <form action="/recs">
-        <label for="recs">Team Comp Finisher: Enter three champions...</label>
-        <div>
-          <input id="champ1" name="champ1" value="{{champ1}}">
-        </div>
-        <div>
-          <input id="champ2" name="champ2" value="{{champ2}}">
-        </div>
-        <div>  
-          <input id="champ3" name="champ3" value="{{champ3}}">
-        </div>
-        <input type="submit">
-      </form>
     </div>
   </div>
   </div>

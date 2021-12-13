@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from models import MongoModel, RedisModel, Neo4jModel
 from mongoModel import Mongo_Model
+from neoModel import Neo4j_Model
 
 app = Flask(__name__)
 
@@ -15,22 +16,6 @@ def autocompleteSpecies():
     term = request.args.get("term")
     result = RedisModel().searchSpecies(term)
     return jsonify(result)
-
-
-# @app.route("/species", methods=["GET"])
-# def listSpecies(speciesName=None):
-#     if not (speciesName):
-#         speciesName = request.args.get("name")
-
-#     mongoDoc = MongoModel().getSpecies(speciesName)[0]
-#     pokemon = []
-#     if mongoDoc and mongoDoc['pokemons']:
-#         for poke in mongoDoc['pokemons']:
-#             pokemon.append({"name": poke['pokemon'], "type": poke['type']})
-
-#     neoResults = Neo4jModel().getSpeciesSuggestions(speciesName)
-#     template = render_template("species.html", speciesName=speciesName, pokemons=pokemon, speciessug=neoResults)
-#     return template
 
 @app.route("/champs", methods=["GET"])
 def listSpecies(speciesName=None):
@@ -50,6 +35,31 @@ def listSpecies(speciesName=None):
     # lore = mongoDoc[0]['lore']
 
     template = render_template("champs.html", champions=champs)
+    return template
+
+@app.route("/recs", methods=["GET"])
+def listRecs(champ1=None, champ2=None, champ3=None):
+    if not (champ1):
+        champ1=request.args.get("champ1")
+    if not (champ2):
+        champ2=request.args.get("champ2")
+    if not (champ3):
+        champ3=request.args.get("champ3")
+
+    neoDoc = Neo4j_Model().getChampRandFiltered(champ1, champ2, champ3)
+    print("NeoDoc = " + str(neoDoc))
+    print("NeoDoc Type = " + str(type(neoDoc)))
+    print("NeoDoc length = " + str(len(neoDoc)))
+    print("NeoDoc1: " + neoDoc[0])
+    print("NeoDoc2: " + neoDoc[1])
+
+
+    championOne = Mongo_Model().getChamps(neoDoc[0])
+    print("Champion1: " + str(championOne))
+    championTwo = Mongo_Model().getChamps(neoDoc[1])
+    print("champion2: " + str(championTwo))
+
+    template = render_template("recs.html", rec1=championOne, rec2=championTwo)
     return template
 
 @app.route("/pokemon", methods=["GET"])
