@@ -30,9 +30,6 @@ def listSpecies(speciesName=None):
         champs.append({"name": champ['name'], "title": champ['title'], "lore": champ['lore'], "tags": champ['tags'], "image": "/static/portraits/" + champ["index"] + ".jpg"})
 
     print(mongoDoc)
-    # name = mongoDoc[0]['name']
-    # title = mongoDoc[0]['title']
-    # lore = mongoDoc[0]['lore']
 
     template = render_template("champs.html", champions=champs)
     return template
@@ -54,27 +51,12 @@ def listRecs(champ1=None, champ2=None, champ3=None):
     print("NeoDoc2: " + neoDoc[1])
 
 
-    championOne = Mongo_Model().getChamps(neoDoc[0])
+    championOne = Mongo_Model().getChamps(neoDoc[0])[0]
     print("Champion1: " + str(championOne))
-    championTwo = Mongo_Model().getChamps(neoDoc[1])
+    championTwo = Mongo_Model().getChamps(neoDoc[1])[0]
     print("champion2: " + str(championTwo))
 
     template = render_template("recs.html", rec1=championOne, rec2=championTwo)
-    return template
-
-@app.route("/pokemon", methods=["GET"])
-def listPokemon(pokemonName=None):
-    if not (pokemonName):
-        pokemonName = request.args.get("name")
-
-    mongoDoc = MongoModel().getPokemon(pokemonName)[0]
-    pokemonDoc = mongoDoc["pokemons"][0]
-    speciesName = mongoDoc["name"]
-
-    neoResults = Neo4jModel().getPokemonSuggestions(pokemonName)
-
-    template = render_template("pokemons.html", speciesName=speciesName, pokemonName=pokemonName, pokemons=neoResults,
-                               type=pokemonDoc['type'], weight=pokemonDoc["weight_kg"], height=pokemonDoc["height_m"])
     return template
 
 # @app.route("/champs")
