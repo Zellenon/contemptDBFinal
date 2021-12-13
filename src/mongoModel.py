@@ -70,7 +70,7 @@ def listChamps(term=None):
     champs = []
     if mongoDoc:
         for champ in mongoDoc:
-            #abilities.append({"name": champ['name'], "tags": champ['tags'], "lore": champ['lore'], "title": champ[title]})
+            #champs.append({"name": champ['name'], "tags": champ['tags'], "lore": champ['lore'], "title": champ[title]})
             champs.append({"name": champ['name'], "tags": champ['tags']})
     return champs    
 
