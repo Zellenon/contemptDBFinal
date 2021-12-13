@@ -9,7 +9,8 @@ import sys
 def connect():
     """Return a connection to the database."""
     try:
-        creds = open("res/credentials.txt").read()[:-1]
+        creds = open("../res/credentials.txt").read()[:-1]
+        print(creds)
         graph = Graph(password=creds)
         print("connected.")
         return graph
@@ -20,7 +21,7 @@ def connect():
 
 
 db = connect()
-data = open("res/matchdata2.csv").readlines()
+data = open("../res/matchdata2.csv").readlines()
 data = [w[:-1] for w in data]
 data = [w.split(',') for w in data]
 # pprint(data)
@@ -60,6 +61,7 @@ for champ in champs:
 print("Champs Imported.")
 
 for match in matches:
+    print(match)
     st = ("MATCH (top: Champ {Name: \"" + match[1] + "\"}), " +
           "(jungle: Champ {Name: \"" + match[2] + "\"}), " +
           "(mid: Champ {Name: \"" + match[3] + "\"})," +
