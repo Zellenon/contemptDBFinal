@@ -22,6 +22,13 @@ class MongoModel:
             result = {"name": "Champ NOT found", "name": id}
         return list(result)
 
+    def getChampByName(self, name):
+        db = self.mongoClient.CDBFP
+        result = db.champs.find({'name': name})
+        if not result:
+            result = {"name": "Champ NOT found", "name": name}
+        return list(result)
+
     def getAbilities(self, term):
         db = self.mongoClient.CDBFP
         result = db.abilities.find({ "$text": { "$search": term}}, {"index" : 1, "champion": 1, "name": 1, "description": 1, "_id": 0})
@@ -67,6 +74,18 @@ def listChamps(term=None):
         return None
 
     mongoDoc = MongoModel().getChamps(term)
+    champs = []
+    if mongoDoc:
+        for champ in mongoDoc:
+            #champs.append({"name": champ['name'], "tags": champ['tags'], "lore": champ['lore'], "title": champ[title]})
+            champs.append({"name": champ['name'], "tags": champ['tags']})
+    return champs    
+
+def listChampsFromName(term=None):
+    if not (term):
+        return None
+
+    mongoDoc = MongoModel().getChampByName(term)
     champs = []
     if mongoDoc:
         for champ in mongoDoc:
