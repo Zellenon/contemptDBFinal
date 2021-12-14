@@ -35,7 +35,6 @@ class Neo4j_Model:
         print("Response: " + str(response))
         session.close()
         return response
-
 # END CLASS
 
 print(Neo4j_Model().getChampRandFiltered("Caitlyn", "Swain", "Bard"))
