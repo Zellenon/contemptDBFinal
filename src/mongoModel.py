@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-class MongoModel:
+class Mongo_Model:
     def __init__(self, url='mongodb://localhost:27017/pokemon'):
         self.mongoUrl = url
         self.mongoClient = MongoClient(url)
@@ -11,6 +11,8 @@ class MongoModel:
     def getChamps(self, term):
         db = self.mongoClient.CDBFP
         result = db.champs.find({ "$text": { "$search": term}}, {"index" : 1, "name": 1, "title": 1, "lore": 1, "tags": 1, "_id": 0})
+        # print("Result: " + str(list(result)))
+        # print("NumResults: " + str(len(list(result))))
         if not result:
             result = {"name": "Champ NOT found", "name": term}
         return list(result)
@@ -49,7 +51,7 @@ def listAbilities(term=None):
     if not (term):
         return None
 
-    mongoDoc = MongoModel().getAbilities(term)
+    mongoDoc = Mongo_Model().getAbilities(term)
     abilities = []
     if mongoDoc:
         for ability in mongoDoc:
@@ -61,7 +63,7 @@ def listAbilitiesFromChamp(champID=None):
     if not (champID):
         return None
 
-    mongoDoc = MongoModel().getAbilitiesFromChamp(champID)
+    mongoDoc = Mongo_Model().getAbilitiesFromChamp(champID)
     abilities = []
     if mongoDoc:
         for ability in mongoDoc:
@@ -73,7 +75,7 @@ def listChamps(term=None):
     if not (term):
         return None
 
-    mongoDoc = MongoModel().getChamps(term)
+    mongoDoc = Mongo_Model().getChamps(term)
     champs = []
     if mongoDoc:
         for champ in mongoDoc:
@@ -94,4 +96,4 @@ def listChampsFromName(term=None):
     return champs    
 
 
-MongoModel().close()
+Mongo_Model().close()
