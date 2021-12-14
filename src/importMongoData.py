@@ -29,7 +29,7 @@ def getData(fpath):
     print(headers)
     headers[0] = "index"
     entries = [{headers[c]: w[c] for c in range(0, len(headers))}
-               for w in data]
+               for w in data[1:]]
     return entries
 
 
