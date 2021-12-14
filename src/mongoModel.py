@@ -87,7 +87,7 @@ def listChampsFromName(term=None):
     if not (term):
         return None
 
-    mongoDoc = MongoModel().getChampByName(term)
+    mongoDoc = Mongo_Model().getChampByName(term)
     champs = []
     if mongoDoc:
         for champ in mongoDoc:

@@ -22,7 +22,7 @@ def getData(fpath):
 
     returns: count of the documants in the new collection
     """
-    data = open(fpath).readlines()
+    data = open(fpath, encoding='utf-8').readlines()
     data = [w.replace("\n", "") for w in data]
     data = [w.split(',\t') for w in data]
     headers = data[0]
@@ -38,13 +38,22 @@ db.abilities.drop()
 db.create_collection("abilities")
 # entries = getData("../res/abilities.tsv")
 entries = getData("res/abilities.tsv")
+
 db.abilities.insert_many(entries)
 db.abilities.create_index([("name", "text"), ("description", "text")])
 
 db.champs.drop()
 db.create_collection("champs")
-# entries = getData("../res/champs.tsv")
+# entries = getData("../res/champs2.tsv")
 entries = getData("res/champs2.tsv")
+
+# added to get rid of extra quotes in db
+for entry in entries:
+    for key in entry:
+        if key == "name" or key == "title" or key == "lore":
+            entry[key] = entry[key][1:-1]
+
+
 db.champs.insert_many(entries)
 #db.champs.create_index([("name", "text"), ("title", "text"), ("lore", "text")])
 db.champs.create_index([("name", "text"), ("title", "text"), ("lore", "text"), ("tags", "text")])
