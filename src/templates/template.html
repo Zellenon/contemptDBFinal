@@ -5,6 +5,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="../static/style.css">
+<title>LoL Tracker</title>
+<link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}">
 </head>
 <body>
 
@@ -13,33 +15,64 @@
   <p>Find champion by keyword, or build the rest of your team!</p>
 </div>
 
+<div class="topnav">
+  <a href="/">Home</a>
+  <a href="https://github.com/Zellenon/contemptDBFinal">Github</a>
+  <a href="https://www.leagueoflegends.com/en-us/">Play Now</a>
+</div>
+
+
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
+      <h2>Champion Search:</h2>
       <form action="/champs">
-        <label for="species">Champion Search:</label>
-        <input id="species" name="name" value="{{species}}">
-        <input type="submit">
+        <label for="champion">Find a champion by keyword...</label>
+        <input id="champion" name="name" value="{{champName}}">
+        <input type="submit" value="Search" id="send-btn">
       </form>
-
+    </div>
+    <div class="card">
+      <h2>Team Composition Finisher:</h2>
+      <h5>Enter three champions...</h5>
       <form action="/recs">
-        <label for="recs">Team Comp Finisher: Enter three champions...</label>
         <div>
+          <label for="champ1">Champion 1:</label>
           <input id="champ1" name="champ1" value="{{champ1}}">
         </div>
         <div>
+          <label for="champ2">Champion 1:</label>
           <input id="champ2" name="champ2" value="{{champ2}}">
         </div>
-        <div>  
+        <div>
+          <label for="champ3">Champion 3:</label>
           <input id="champ3" name="champ3" value="{{champ3}}">
         </div>
-        <input type="submit">
+        <input type="submit" value="Get Fill Champs" id="send-btn">
       </form>
     </div>
   </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>Learn the Basics</h2>
+      <img src="../static/basics.jpg" style="height: 200px;">
+      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+    </div>
+    <div class="card">
+      <h3>Latest Patches bring ultimate spellbook champion buffs...</h3>
+      <img src="../static/patchNotes.jpg" style="height: 250px;">
+      <p>We're keeping it classy this week with sophisticated champion, item, rune, and dragon updates to keep preseason running splendidly. Ultimate Spellbook is also getting a spiffy update, and ARAM players worry not—we have some swanky news for you, too. So get your flashiest outfits ready to greet the new year in glitz and glam! It'll be just grand.</p>
+    </div>
   </div>
 </div>
-
+<div class="footer">
+  <a href="https://na.leagueoflegends.com/en/game-info/get-started/what-is-lol/?_gl=1*vfjkmz*_ga*MTUxMjMyODAxNi4xNjM5NDMyNDE0*_ga_FXBJE5DEDD*MTYzOTQ1Mzg5OS4zLjEuMTYzOTQ1NjUxNi41NQ..">About LoL</a>
+  <a href="http://leagueoflegends.na-surveyen2.sgizmo.com/s3/">Help Them Improve</a>
+  <a href="https://status.riotgames.com/?locale=en_US&region=na&_gl=1*vfjkmz*_ga*MTUxMjMyODAxNi4xNjM5NDMyNDE0*_ga_FXBJE5DEDD*MTYzOTQ1Mzg5OS4zLjEuMTYzOTQ1NjUxNi41NQ..">Server Status</a>
+  <a href="https://support.riotgames.com/hc/en-us?_gl=1*vfjkmz*_ga*MTUxMjMyODAxNi4xNjM5NDMyNDE0*_ga_FXBJE5DEDD*MTYzOTQ1Mzg5OS4zLjEuMTYzOTQ1NjUxNi41NQ..">Support</a>
+  <a href="https://www.lolesports.com/en_US/">Esports Pro Site</a>
+  <a href="https://riotgames.sng.link/Dnyzj/csgh">Download Riot Mobile</a>
+</div>
 </body>
 </html>
 
