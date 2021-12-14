@@ -22,7 +22,7 @@
   /* Style the top navigation bar */
   .topnav {
     overflow: hidden;
-    background-color: #333;
+    background-color: #343050;
   }
   
   /* Style the topnav links */
@@ -37,8 +37,8 @@
   
   /* Change color on hover */
   .topnav a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: #037bfc;
+    color: white;
   }
   
   /* Create two unequal columns that floats next to each other */
@@ -77,14 +77,62 @@
     clear: both;
   }
   
+  form {
+      max-width:500px;
+  }
+
+  form label{
+      display:block;
+      padding:1rem 0 .5rem;
+  }
+  form input{
+      width: 100%;
+      margin:5px;
+      border:2px solid;
+      border-radius:5px;
+      padding:.5rem;
+      font-size:18px;
+  }
+  #send-btn{
+      border:0;
+      background:#343050;
+      padding:.5rem;
+      color:white;
+      margin:1rem 0;
+      width:auto;
+      text-transform:uppercase;
+      cursor:pointer;
+  }
+  #send-btn:hover{
+      background: #037bfc;
+  }
+  
   /* Footer */
   .footer {
     padding: 20px;
     text-align: center;
-    background: #ddd;
+    background: #525151;
+    color: white;
     margin-top: 20px;
-  }
-  
+    text-transform: uppercase;
+    overflow: hidden;
+  } 
+    /* Style the topnav links */
+      .footer a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      /* Change color on hover */
+      .footer a:hover {
+        background-color: #737373;
+        color: white;
+      }
+
   /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 800px) {
     .leftcolumn, .rightcolumn {   

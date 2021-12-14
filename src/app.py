@@ -17,11 +17,11 @@ def hello():
 #     return jsonify(result)
 
 @app.route("/champs", methods=["GET"])
-def listSpecies(speciesName=None):
-    if not (speciesName):
-        speciesName = request.args.get("name")
+def listSpecies(champName=None):
+    if not (champName):
+        champName = request.args.get("name")
 
-    mongoDoc = Mongo_Model().getChamps(speciesName)
+    mongoDoc = Mongo_Model().getChamps(champName)
     # neoResults = Neo4jModel().getSpeciesSuggestions(speciesName)
 
     champs = []
