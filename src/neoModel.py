@@ -1,7 +1,7 @@
 from neo4j import GraphDatabase
 
 class Neo4j_Model:
-    def __init__(self, url='bolt://localhost:7687', user='neo4j', password='a'):
+    def __init__(self, url='bolt://localhost:7687', user='neo4j', password='moderndb'):
         self.neo4jUrl = url
         self.neo4jDriver = GraphDatabase.driver(url, auth=(user, password))
 
@@ -35,8 +35,6 @@ class Neo4j_Model:
         print("Response: " + str(response))
         session.close()
         return response
-<<<<<<< HEAD
-=======
 
     def getChampSuggestion(self, champ1, champ2, champ3, role1, role2, role3):
         with self.neo4jDriver.session() as session:
@@ -47,7 +45,6 @@ class Neo4j_Model:
         session.close()
         return response
 
->>>>>>> 754d4119c94ddebca11c003dffccac35bc144cc1
 # END CLASS
 
-print(Neo4j_Model().getChampSuggestion("Leblanc", "Nocturne", "Jhin", "support", "buttom", "adc"))
+print(Neo4j_Model().getChampSuggestion("Leblanc", "Nocturne", "Jhin", "support", "jungle", "adc"))

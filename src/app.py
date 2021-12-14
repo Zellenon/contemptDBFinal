@@ -34,15 +34,21 @@ def listSpecies(champName=None):
     return template
 
 @app.route("/recs", methods=["GET"])
-def listRecs(champ1=None, champ2=None, champ3=None):
+def listRecs(champ1=None, champ2=None, champ3=None, roll1=None, roll2=None, roll3=None):
     if not (champ1):
         champ1=request.args.get("champ1")
     if not (champ2):
         champ2=request.args.get("champ2")
     if not (champ3):
         champ3=request.args.get("champ3")
+    if not (roll1):
+        roll1=request.args.get("roll1")
+    if not (roll2):
+        roll2=request.args.get("roll2")
+    if not (roll3):
+        roll3=request.args.get("roll3")
 
-    neoDoc = Neo4j_Model().getChampRandFiltered(champ1, champ2, champ3)
+    neoDoc = Neo4j_Model().getChampSuggestion(champ1, champ2, champ3, roll1, roll2, roll3)
     print("NeoDoc = " + str(neoDoc))
     print("NeoDoc Type = " + str(type(neoDoc)))
     print("NeoDoc length = " + str(len(neoDoc)))
